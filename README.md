@@ -1,37 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 SHIFTRY - シフト作成、なんくるないさ〜！
 
-## Getting Started
+現在、LINEグループを活用したシフト管理SaaS **「SHIFTRY」** を開発中です（※開発段階）。
 
-First, run the development server:
+ターゲットはITリテラシーの低い小規模事業者で、LINEだけでシフト提出・調整が完結できる、シンプル機能・低価格のSaaSを目指しています。
+沖縄で暮らす中で、未だにExcelや手書きでシフトを管理している店舗が多い現状に課題を感じ、「もっと気軽に、効率よくシフトを組める環境を届けたい」という想いから開発に至りました。。
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+![SHIFTRY pc image](public/pc_image.png)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ✨ 導入までのステップ
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1.  **LINE BOT「SHIFTRY」を追加**
+2.  **line認証＆オーナー・店舗登録**
+3.  **Botを店舗のlineグループに招待**
+4.  **完了**
 
-## Learn More
+- スタッフは、lineグループ内に「シフト提出依頼通知」の際に送信されたリンクから登録・ログインして、利用します。
 
-To learn more about Next.js, take a look at the following resources:
+## 技術スタック
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🧩 使用技術
+| フロント | バックエンド | DB | 認証 |
+| --- | --- | --- | --- |
+| TypeScript | TypeScript | neon | LineOauth |
+| Next.js | express | prisma | LIFF |
+| Redux |  |  | Cookie認証 |
+| TailwindCSS |  |  | JWT |
+| daisyUI |  |  |  |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# SHIFTRY-frontend
+| インフラ | 外部API | CICD | その他 |
+| --- | --- | --- | --- |
+| Vercel (フロント) | line api | githubActions | Figma |
+| AWS ECS（バックエンド） | stripe | jest | Notion |
+|  | openAI api | biome | miro |
