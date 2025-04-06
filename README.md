@@ -29,8 +29,9 @@
 | TailwindCSS |  |  | JWT |
 | daisyUI |  |  |  |
 
-| インフラ | 外部API | CICD | その他 |
+| インフラ | 外部API | テスト・フォーマット | その他 |
 | --- | --- | --- | --- |
 | Vercel (フロント) | line api | githubActions | Figma |
 | AWS ECS（バックエンド） | stripe | jest | Notion |
 |  | openAI api | biome | miro |
+|  |  |  | postman |
