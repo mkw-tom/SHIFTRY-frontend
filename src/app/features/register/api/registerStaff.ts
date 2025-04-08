@@ -1,12 +1,13 @@
-import type { RegisterStaffPayload, RegisterUserResponse } from "../types/api";
+import type { RegisterStaffPayload, RegisterStaffResponse } from "../types/api";
 
 export const postRegisterStaff = async (
 	payload: RegisterStaffPayload,
-): Promise<RegisterUserResponse> => {
+): Promise<RegisterStaffResponse> => {
 	const res = await fetch("/api/register-staff", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
+			"X-Group-Id": payload.groupId,
 		},
 		body: JSON.stringify(payload),
 	});

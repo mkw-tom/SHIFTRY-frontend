@@ -1,18 +1,13 @@
+import type { RootState } from "@/app/redux/store";
+import type { UserRole } from "@/app/types/User";
+import { setTokenAndStoreToken } from "@/app/utils/token";
 import React from "react";
+import { useSelector } from "react-redux";
+import { postRegisterOwner } from "../../api/registerOwner";
 import { UseRegisterLoadingUI } from "../../context/UseRegisterLoading";
 import { useRegisterSteps } from "../../context/UseRegisterStepContext";
-// import { useSelector } from 'react-redux';
-// import { UserType } from '@/app/types/User';
-// import { RegisterOwnerPayload } from '../types/api';
-// import { postRegisterOwner } from '../api/registerOwner';
-import type { UserInputType } from "../../validate/userInputValidate";
-
-export const dummyUserInput: UserInputType = {
-	name: "aiueo",
-	lineId: "aiueo",
-	pictureUrl: "https://example.com/image.jpg",
-	role: "OWNER",
-};
+// import type { UserInputType } from "../../validate/userInputValidate";
+import type { RegisterOwnerPayload } from "../../types/api";
 
 const RegisterButton = ({
 	storeName,
@@ -20,30 +15,37 @@ const RegisterButton = ({
 }: { storeName: string; isDisabled: boolean }) => {
 	const { changeInviteBotStep } = useRegisterSteps();
 	const { apiLoading, setApiLoading } = UseRegisterLoadingUI();
-	// const user = useSelector((state: { user: UserType}) => state.user);
+	const { user } = useSelector((state: RootState) => state.user);
 	async function handleRegister() {
 		try {
 			setApiLoading(true);
 			await new Promise((resolve) => setTimeout(resolve, 3000));
-			if (storeName) {
+			if (!storeName) {
 				console.log("storename undfined");
 			}
 
-			// const payload: RegisterOwnerPayload = {
-			//   // userInput: {
-			//   //   name: user.name,
-			//   //   lineId: user.lineId,
-			//   //   pictureUrl: user.pictureUrl || undefined,
-			//   //   role: user.role,
-			//   // },
-			//   userInput: dummyUserInput,
-			//   storeInput: {
-			//     name: storeName,
-			//     groupId: storeName, ///オーナー登録時は仮で店舗名を入れる
-			//   }
-			// }
+			console.log("ユーザー", user);
 
-			// await postRegisterOwner(payload);
+			const payload: RegisterOwnerPayload = {
+				userInput: {
+					name: user?.name as string,
+					lineId: user?.lineId as string,
+					pictureUrl: user?.pictureUrl || undefined,
+					role: user?.role as UserRole,
+				},
+				storeInput: {
+					name: storeName,
+					groupId: storeName,
+				},
+			};
+			console.log(payload);
+
+			const res = await postRegisterOwner(payload);
+			if (!res.ok) {
+				return console.log("failed register owner and store");
+			}
+
+			setTokenAndStoreToken(res.token, res.store.id);
 
 			changeInviteBotStep();
 		} catch (error) {
