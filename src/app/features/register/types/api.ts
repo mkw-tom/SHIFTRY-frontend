@@ -13,8 +13,16 @@ export interface RegisterStaffPayload {
 	groupId: string;
 }
 
-export type RegisterUserResponse = {
-	ok: true;
+export type RegisterOwnerResponse = {
+	ok: boolean;
 	user: UserType;
 	store: StoreType;
+	token: string;
+};
+
+export type RegisterStaffResponse = {
+	ok: boolean;
+	user: UserType;
+	store: StoreType;
+	toke: string;
 };
