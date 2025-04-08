@@ -6,7 +6,15 @@ type UserState = {
 };
 
 const initialState: UserState = {
-	user: null,
+	user: {
+		id: "",
+		lineId: "",
+		name: "",
+		pictureUrl: "",
+		role: "OWNER",
+		createdAt: "",
+		updatedAt: "",
+	},
 };
 
 export const UserSlice = createSlice({
@@ -52,6 +60,11 @@ export const UserSlice = createSlice({
 	},
 });
 
-export const { setUser, updateUserProfile, changeUserRole, clearUser } =
-	UserSlice.actions;
+export const {
+	setUser,
+	setRegisterUserInfo,
+	updateUserProfile,
+	changeUserRole,
+	clearUser,
+} = UserSlice.actions;
 export default UserSlice.reducer;

@@ -35,9 +35,10 @@ export const RegisterStepsProvider = ({
 	const [step, setStep] = useState<RegisterStep>(RegisterStep.Auth);
 
 	useEffect(() => {
-		const saved = localStorage.getItem("isRegistered");
+		const token = localStorage.getItem("token");
+		const storeToken = localStorage.getItem("store_token");
 
-		if (saved === "true") {
+		if (token && storeToken) {
 			setStep(RegisterStep.InviteBot);
 		}
 	}, []);
@@ -47,7 +48,6 @@ export const RegisterStepsProvider = ({
 	}
 
 	function changeInviteBotStep() {
-		localStorage.setItem("isRegistered", "true");
 		setStep(RegisterStep.InviteBot);
 	}
 

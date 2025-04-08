@@ -1,9 +1,9 @@
-import type { RegisterOwnerPayload, RegisterUserResponse } from "../types/api";
+import type { RegisterOwnerPayload, RegisterOwnerResponse } from "../types/api";
 
 export const postRegisterOwner = async (
 	payload: RegisterOwnerPayload,
-): Promise<RegisterUserResponse> => {
-	const res = await fetch("http://localhost:3001/api/auth/register-owner", {
+): Promise<RegisterOwnerResponse> => {
+	const res = await fetch("http://localhost:3000/api/auth/register-owner", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",

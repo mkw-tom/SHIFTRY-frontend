@@ -1,16 +1,38 @@
 import React from "react";
 
+import { postlineAuth } from "@/app/features/common/api/lineAuth";
+import { setRegisterUserInfo } from "@/app/redux/slices/user";
+import type { AppDispatch } from "@/app/redux/store";
+import { useDispatch } from "react-redux";
 import { UseRegisterLoadingUI } from "../../context/UseRegisterLoading";
 import { useRegisterSteps } from "../../context/UseRegisterStepContext";
 
 const LineAuthButton = ({ isDisabled }: { isDisabled: boolean }) => {
 	const { changeRegisterStep } = useRegisterSteps();
 	const { apiLoading, setApiLoading } = UseRegisterLoadingUI();
+	const dispatch = useDispatch<AppDispatch>();
 
 	async function handleRegister() {
 		try {
 			setApiLoading(true);
 			await new Promise((resolve) => setTimeout(resolve, 3000));
+			const userLineInfo = await postlineAuth();
+			if (!userLineInfo.ok) {
+				throw new Error("faild authenticated line");
+			}
+			const { userId, name, pictureUrl } = userLineInfo;
+			if ([userId, name, pictureUrl].some((v) => !v)) {
+				throw new Error("faild get your profile of line");
+			}
+
+			await dispatch(
+				setRegisterUserInfo({
+					name,
+					pictureUrl,
+					lineId: userId,
+					role: "OWNER",
+				}),
+			);
 
 			changeRegisterStep();
 		} catch (error) {
