@@ -1,7 +1,8 @@
+import { API_URL } from "@/app/lib/env";
 import type { lineAuthResponse } from "../types/api";
 
 export const postlineAuth = async (): Promise<lineAuthResponse> => {
-	const res = await fetch("http://localhost:3000/api/auth/line-auth", {
+	const res = await fetch(`${API_URL}/api/auth/line-auth`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",

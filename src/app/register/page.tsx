@@ -7,7 +7,7 @@ const Page = () => {
 			<div className="bg-green01 w-full md:w-[400px] mx-auto">
 				<div className="w-full pt-20">
 					<Image
-						src="/logoTitle.png"
+						src="/logo-top.png"
 						alt="register"
 						width={200}
 						height={100}
