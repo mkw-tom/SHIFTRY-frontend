@@ -4,7 +4,7 @@ const InviteBotForm = () => {
 	return (
 		<>
 			<Image
-				src="/invite.jpeg"
+				src="/invite-bot.jpeg"
 				alt="register"
 				width={300}
 				height={300}
@@ -12,7 +12,7 @@ const InviteBotForm = () => {
 			/>
 			<a
 				href="line://"
-				className="btn btn-sm bg-green02 rounded-full border-none w-2/3 mx-auto"
+				className="btn btn-sm bg-green02 rounded-full border-none w-2/3 mx-auto text-white"
 			>
 				LINEを開く
 			</a>

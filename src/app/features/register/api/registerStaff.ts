@@ -1,9 +1,10 @@
+import { API_URL } from "@/app/lib/env";
 import type { RegisterStaffPayload, RegisterStaffResponse } from "../types/api";
 
 export const postRegisterStaff = async (
 	payload: RegisterStaffPayload,
 ): Promise<RegisterStaffResponse> => {
-	const res = await fetch("/api/register-staff", {
+	const res = await fetch(`${API_URL}/api/register-staff`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
