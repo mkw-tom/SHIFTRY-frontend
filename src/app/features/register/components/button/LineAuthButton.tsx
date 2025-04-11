@@ -15,7 +15,6 @@ const LineAuthButton = ({ isDisabled }: { isDisabled: boolean }) => {
 	async function handleRegister() {
 		try {
 			setApiLoading(true);
-			await new Promise((resolve) => setTimeout(resolve, 3000));
 			const userLineInfo = await postlineAuth();
 			if (!userLineInfo.ok) {
 				throw new Error("faild authenticated line");
