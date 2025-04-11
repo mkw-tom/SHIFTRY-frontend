@@ -14,14 +14,14 @@ export const useLineAuth = () => {
 	const [error, setError] = useState<string | null>(null);
 
 	useEffect(() => {
-    const code = searchParams.get("code");
-    if (!code || code === "undefined") {
-      console.warn("LINEのcodeが取得できてません");
-      return;
-    }
-  
-    console.log("LINEのcode:", code);
-    console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
+		const code = searchParams.get("code");
+		if (!code || code === "undefined") {
+			console.warn("LINEのcodeが取得できてません");
+			return;
+		}
+
+		console.log("LINEのcode:", code);
+		console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
 		const fetchLineAuth = async () => {
 			try {
 				const res = await fetch(
