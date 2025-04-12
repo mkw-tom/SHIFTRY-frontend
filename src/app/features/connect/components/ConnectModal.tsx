@@ -1,7 +1,8 @@
-import { useAgreeCheckbox } from "@/app/features/common/hooks/useAgreeCheckBox";
-import LineAuthButton from "../button/LineAuthButton";
+import React from "react";
+import { useAgreeCheckbox } from "../../common/hooks/useAgreeCheckBox";
+import ConnectButton from "./ConnectButton";
 
-const LineAuthForm = () => {
+const ConnectModal = () => {
 	const { register, isDisabled, errors } = useAgreeCheckbox();
 
 	return (
@@ -16,16 +17,16 @@ const LineAuthForm = () => {
 						disabled={false}
 					/>
 					<span className=" text-xs text-black">
-						ユーザーの名前とアイコンの取得に同意します。
+						サービス利用のため、LINEグループの情報取得に同意します。
 					</span>
 				</label>
 				{errors.agree && (
 					<p className="fieldset-label text-error">{errors?.agree?.message}</p>
 				)}
 			</fieldset>
-			<LineAuthButton isDisabled={isDisabled} />
+			<ConnectButton isDisabled={isDisabled} />
 		</>
 	);
 };
 
-export default LineAuthForm;
+export default ConnectModal;

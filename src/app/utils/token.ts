@@ -5,9 +5,17 @@ export const setTokenAndStoreToken = (userId: string, storeId: string) => {
 };
 
 /// tokenからuserIdを取得
-export const getToken = () => localStorage.getItem("token");
+export const getToken = () => {
+	const token = localStorage.getItem("token");
+	if (!token) throw new Error("tokenが存在しません");
+	return token;
+};
 
-export const getStoreToken = () => localStorage.getItem("store_token");
+export const getStoreToken = () => {
+	const storeToken = localStorage.getItem("store_token");
+	if (!storeToken) throw new Error("store_tokenが存在しません");
+	return storeToken;
+};
 
 export const clearTokens = () => {
 	localStorage.removeItem("token");

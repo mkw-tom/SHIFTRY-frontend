@@ -1,27 +1,10 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { isValid } from "zod";
 import { UseRegisterLoadingUI } from "../../context/UseRegisterLoading";
-import {
-	type registerStoreNmaeType,
-	registerStoreNmaeValidate,
-} from "../../validate/RegisterOwnerFormValidation";
+import useStoreNameForm from "../../hooks/useStoreNameForm";
 import RegisterButton from "../button/RegisterButton";
 
-// import { useEffect, useState } from "react";
-
 const RegisterForm = () => {
-	const {
-		register,
-		formState: { errors },
-		watch,
-	} = useForm<registerStoreNmaeType>({
-		resolver: zodResolver(registerStoreNmaeValidate),
-		mode: "onChange",
-	});
-	const storeName = watch("name") ?? "";
+	const { register, errors, isDisabled, storeName } = useStoreNameForm();
 	const { apiLoading } = UseRegisterLoadingUI();
-	const isDisabled = !isValid || storeName === "";
 
 	return (
 		<>

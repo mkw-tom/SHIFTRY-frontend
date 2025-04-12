@@ -1,4 +1,5 @@
-import { useRouter } from "next/navigation";
+import { useNavigation } from "@/app/lib/navigation";
+import type { RootState } from "@/app/redux/store";
 import {
 	type ReactNode,
 	createContext,
@@ -6,6 +7,7 @@ import {
 	useEffect,
 	useState,
 } from "react";
+import { useSelector } from "react-redux";
 
 export enum RegisterStep {
 	Auth = 0,
@@ -14,8 +16,6 @@ export enum RegisterStep {
 }
 export type RegisterUIContextType = {
 	step: RegisterStep;
-	changeRegisterStep: () => void;
-	changeInviteBotStep: () => void;
 };
 
 const registerUIContext = createContext<RegisterUIContextType | undefined>(
@@ -34,34 +34,23 @@ export const RegisterStepsProvider = ({
 	children,
 }: { children: ReactNode }) => {
 	const [step, setStep] = useState<RegisterStep>(RegisterStep.Auth);
-	const router = useRouter();
+	const { navigateToInvite } = useNavigation();
+	const { user } = useSelector((state: RootState) => state.user);
 
 	useEffect(() => {
 		const token = localStorage.getItem("token");
 		const storeToken = localStorage.getItem("store_token");
 
 		if (token && storeToken) {
-			setStep(RegisterStep.InviteBot);
+			navigateToInvite();
 		}
-	}, []);
-
-	function changeRegisterStep() {
-		setStep(RegisterStep.Register);
-		router.push("/register");
-	}
-
-	function changeInviteBotStep() {
-		setStep(RegisterStep.InviteBot);
-	}
-
-	const value = {
-		step,
-		changeRegisterStep,
-		changeInviteBotStep,
-	};
+		if (user?.lineId) {
+			setStep(RegisterStep.Register);
+		}
+	}, [navigateToInvite, user?.lineId]);
 
 	return (
-		<registerUIContext.Provider value={value}>
+		<registerUIContext.Provider value={{ step }}>
 			{children}
 		</registerUIContext.Provider>
 	);
