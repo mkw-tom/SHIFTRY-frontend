@@ -5,7 +5,7 @@ import {
 	RegisterStep,
 	useRegisterSteps,
 } from "../../context/UseRegisterStepContext";
-import InviteBotForm from "./InviteBotForm";
+// import InviteBotForm from "./InviteBotForm";
 import LineAuthForm from "./LineAuthForm";
 import RegisterForm from "./RegisterForm";
 
@@ -26,7 +26,6 @@ const FormContent = () => {
 		<div className="flex flex-col gap-5 mt-5">
 			{step === RegisterStep.Auth && <LineAuthForm />}
 			{step === RegisterStep.Register && <RegisterForm />}
-			{step === RegisterStep.InviteBot && <InviteBotForm />}
 		</div>
 	);
 };
