@@ -1,3 +1,4 @@
+"use client";
 import { setRegisterUserInfo } from "@/app/redux/slices/user";
 import type { AppDispatch } from "@/app/redux/store";
 import { useRouter } from "next/navigation";
@@ -6,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { useDetectUserRole } from "./useDetectUserRole";
 import { useLineAuth } from "./useLineAutth";
 
-export const useGetLineUserInfo = () => {
+export const useSaveLineUserInfo = () => {
 	const { userLineInfo, error } = useLineAuth();
 	const dispatch = useDispatch<AppDispatch>();
 	const role = useDetectUserRole();
@@ -15,7 +16,6 @@ export const useGetLineUserInfo = () => {
 	useEffect(() => {
 		if (userLineInfo) {
 			const { userId, name, pictureUrl } = userLineInfo;
-
 			dispatch(
 				setRegisterUserInfo({
 					name,
@@ -24,13 +24,14 @@ export const useGetLineUserInfo = () => {
 					role,
 				}),
 			);
-
 			router.push(role === "STAFF" ? "/" : "/register");
 		}
+	}, [userLineInfo, dispatch, router, role]);
 
+	useEffect(() => {
 		if (error) {
 			console.error("エラー:", error);
-			router.push("/register/fail");
+			router.push("/auth/fail");
 		}
-	}, [userLineInfo, error, dispatch, router, role]);
+	}, [error, router]);
 };

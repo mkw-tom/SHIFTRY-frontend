@@ -12,11 +12,16 @@ export const useLineAuth = () => {
 		pictureUrl: string;
 	} | null>(null);
 	const [error, setError] = useState<string | null>(null);
+	const code = searchParams.get("code");
 
 	useEffect(() => {
-		const code = searchParams.get("code");
-		if (!code) return;
+		if (!code || code === "undefined") {
+			console.warn("LINEのcodeが取得できてません");
+			return;
+		}
 
+		console.log("LINEのcode:", code);
+		console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
 		const fetchLineAuth = async () => {
 			try {
 				const res = await fetch(
@@ -39,7 +44,7 @@ export const useLineAuth = () => {
 		};
 
 		fetchLineAuth();
-	}, [searchParams]);
+	}, [code]);
 
 	return { userLineInfo, error };
 };
