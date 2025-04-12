@@ -1,3 +1,4 @@
+"use client";
 import { setRegisterUserInfo } from "@/app/redux/slices/user";
 import type { AppDispatch } from "@/app/redux/store";
 import { useRouter } from "next/navigation";
