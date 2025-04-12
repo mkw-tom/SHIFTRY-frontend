@@ -1,4 +1,4 @@
-"use clinet";
+"use client";
 import { useSaveLineUserInfo } from "@/app/features/auth/callback/hooks/useSaveLineUserInfo";
 import FaildAuthModal from "@/app/features/auth/fail/components/FaildAuthModal";
 import FirstView from "@/app/features/common/components/FirstView";
