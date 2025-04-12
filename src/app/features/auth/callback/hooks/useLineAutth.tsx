@@ -12,9 +12,9 @@ export const useLineAuth = () => {
 		pictureUrl: string;
 	} | null>(null);
 	const [error, setError] = useState<string | null>(null);
+	const code = searchParams.get("code");
 
 	useEffect(() => {
-		const code = searchParams.get("code");
 		if (!code || code === "undefined") {
 			console.warn("LINEのcodeが取得できてません");
 			return;
@@ -44,7 +44,7 @@ export const useLineAuth = () => {
 		};
 
 		fetchLineAuth();
-	}, [searchParams]);
+	}, [code]);
 
 	return { userLineInfo, error };
 };
