@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 import {
 	type ReactNode,
 	createContext,
@@ -33,6 +34,7 @@ export const RegisterStepsProvider = ({
 	children,
 }: { children: ReactNode }) => {
 	const [step, setStep] = useState<RegisterStep>(RegisterStep.Auth);
+	const router = useRouter();
 
 	useEffect(() => {
 		const token = localStorage.getItem("token");
@@ -45,6 +47,7 @@ export const RegisterStepsProvider = ({
 
 	function changeRegisterStep() {
 		setStep(RegisterStep.Register);
+		router.push("/register");
 	}
 
 	function changeInviteBotStep() {
