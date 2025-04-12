@@ -1,23 +1,9 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import {
-	type registerOwnerFormType,
-	registerOwnerFormValidate,
-} from "../../validate/RegisterOwnerFormValidation";
+import { useAgreeCheckbox } from "@/app/features/common/hooks/useAgreeCheckBox";
 import LineAuthButton from "../button/LineAuthButton";
 
 const LineAuthForm = () => {
-	const {
-		register,
-		formState: { errors },
-		watch,
-	} = useForm<registerOwnerFormType>({
-		resolver: zodResolver(registerOwnerFormValidate),
-		mode: "onChange",
-	});
-	const agree = watch("agree");
+	const { register, isDisabled, errors } = useAgreeCheckbox();
 
-	const isDisabled = !agree;
 	return (
 		<>
 			<fieldset className="fieldset w-11/12 mx-auto flex flex-col items-center">
