@@ -1,5 +1,5 @@
-import FormArea from "../features/register/components/form/FormArea";
 import FirstView from "../features/common/components/FirstView";
+import FormArea from "../features/register/components/form/FormArea";
 
 const Page = () => {
 	return (
