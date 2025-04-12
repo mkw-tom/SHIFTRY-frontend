@@ -4,9 +4,9 @@ import { generateLineLoginUrl } from "@/app/lib/line";
 import React from "react";
 
 const LineAuthButton = ({ isDisabled }: { isDisabled: boolean }) => {
-	const handleLineLogin = () => {
+	function handleLineLogin() {
 		window.location.href = generateLineLoginUrl("OWNER");
-	};
+	}
 
 	return (
 		<button

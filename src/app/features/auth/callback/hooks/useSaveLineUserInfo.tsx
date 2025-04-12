@@ -1,4 +1,5 @@
 "use client";
+import { useRegisterSteps } from "@/app/features/register/context/UseRegisterStepContext";
 import { setRegisterUserInfo } from "@/app/redux/slices/user";
 import type { AppDispatch } from "@/app/redux/store";
 import { useRouter } from "next/navigation";
@@ -9,6 +10,7 @@ import { useLineAuth } from "./useLineAutth";
 
 export const useSaveLineUserInfo = () => {
 	const { userLineInfo, error } = useLineAuth();
+	const { changeRegisterStep } = useRegisterSteps();
 	const dispatch = useDispatch<AppDispatch>();
 	const role = useDetectUserRole();
 	const router = useRouter();
@@ -24,9 +26,13 @@ export const useSaveLineUserInfo = () => {
 					role,
 				}),
 			);
-			router.push(role === "STAFF" ? "/" : "/register");
+			if (role === "STAFF") {
+				router.push("/");
+			} else {
+				changeRegisterStep();
+			}
 		}
-	}, [userLineInfo, dispatch, router, role]);
+	}, [userLineInfo, dispatch, router, role, changeRegisterStep]);
 
 	useEffect(() => {
 		if (error) {
