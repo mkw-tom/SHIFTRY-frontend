@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import FaildAuthModal from "@/app/features/auth/fail/components/FaildAuthModal";
 import FirstView from "@/app/features/common/components/FirstView";
 import React from "react";
