@@ -1,3 +1,4 @@
+"use clinet";
 import CallBackModal from "@/app/features/auth/callback/componets/CallBackModal";
 import { useSaveLineUserInfo } from "@/app/features/auth/callback/hooks/useSaveLineUserInfo";
 import FirstView from "@/app/features/common/components/FirstView";
