@@ -1,5 +1,5 @@
 "use client";
-
+import { NEXT_PUBLIC_LIFF_ID_CONNECT_GROUP } from "@/app/lib/env";
 import liff from "@line/liff";
 import {
 	type ReactNode,
@@ -32,15 +32,16 @@ export const GroupConnectProvider = ({ children }: { children: ReactNode }) => {
 	useEffect(() => {
 		const initLiff = async () => {
 			try {
-				// LIFFで開かれてない場合はスキップ
-				if (typeof window === "undefined" || !liff.isInClient()) {
+				if (typeof window === "undefined") return;
+
+				await liff.init({ liffId: NEXT_PUBLIC_LIFF_ID_CONNECT_GROUP });
+
+				if (!liff.isInClient()) {
 					console.warn("LIFFクライアントではありません。");
 					setGroupId(null);
 					setLoading(false);
 					return;
 				}
-
-				await liff.init({ liffId: process.env.NEXT_PUBLIC_LIFF_ID as string });
 
 				if (!liff.isLoggedIn()) {
 					liff.login();
@@ -48,7 +49,6 @@ export const GroupConnectProvider = ({ children }: { children: ReactNode }) => {
 				}
 
 				const context = liff.getContext();
-
 				if (context?.type === "group") {
 					setGroupId(context.groupId ?? null);
 				} else {
