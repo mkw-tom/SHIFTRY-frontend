@@ -1,9 +1,11 @@
 import React from "react";
 import { useAgreeCheckbox } from "../../common/hooks/useAgreeCheckBox";
+import { useConnectUI } from "../context/useConnectUI";
 import ConnectButton from "./ConnectButton";
 
 const ConnectModal = () => {
 	const { register, isDisabled, errors } = useAgreeCheckbox();
+	const { isLoading } = useConnectUI();
 
 	return (
 		<>
@@ -14,7 +16,7 @@ const ConnectModal = () => {
 						type="checkbox"
 						defaultChecked={false}
 						className="checkbox checkbox-sm checkbox-success mb-3 sm:mb-1"
-						disabled={false}
+						disabled={isLoading}
 					/>
 					<span className=" text-xs text-black">
 						サービス利用のため、LINEグループの情報取得に同意します。

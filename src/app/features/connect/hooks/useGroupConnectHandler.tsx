@@ -1,7 +1,10 @@
 import { useNavigation } from "@/app/lib/navigation";
 import { postConnectLineGroup } from "../api/connectLineGroup";
 
-const useGroupConnectHandler = (groupId: string | null) => {
+const useGroupConnectHandler = (
+	groupId: string | null,
+	UpdateLoading: (bool: boolean) => void,
+) => {
 	const { navigateHome } = useNavigation();
 	async function GroupConnectHandler() {
 		if (!groupId) {
@@ -12,6 +15,7 @@ const useGroupConnectHandler = (groupId: string | null) => {
 		}
 
 		try {
+			UpdateLoading(true);
 			const res = await postConnectLineGroup(groupId);
 			if (!res.ok) {
 				throw new Error("グループ連携に失敗しました");
@@ -21,6 +25,8 @@ const useGroupConnectHandler = (groupId: string | null) => {
 		} catch (error) {
 			console.error("グループ連携失敗:", error);
 			alert("LINEグループとの連携に失敗しました。もう一度お試しください。");
+		} finally {
+			UpdateLoading(false);
 		}
 	}
 

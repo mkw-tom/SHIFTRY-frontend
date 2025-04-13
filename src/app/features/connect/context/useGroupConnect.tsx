@@ -12,7 +12,7 @@ import {
 // LIFFのグループID管理Contextの定義
 export type GroupConnectType = {
 	groupId: string | null;
-	loading: boolean;
+	pageLoading: boolean;
 };
 
 const GroupConnect = createContext<GroupConnectType | undefined>(undefined);
@@ -27,7 +27,7 @@ export const useGroupConnect = () => {
 
 export const GroupConnectProvider = ({ children }: { children: ReactNode }) => {
 	const [groupId, setGroupId] = useState<string | null>(null);
-	const [loading, setLoading] = useState<boolean>(true);
+	const [pageLoading, setpageLoading] = useState<boolean>(true);
 
 	useEffect(() => {
 		const initLiff = async () => {
@@ -39,7 +39,7 @@ export const GroupConnectProvider = ({ children }: { children: ReactNode }) => {
 				if (!liff.isInClient()) {
 					console.warn("LIFFクライアントではありません。");
 					setGroupId(null);
-					setLoading(false);
+					setpageLoading(false);
 					return;
 				}
 
@@ -58,7 +58,7 @@ export const GroupConnectProvider = ({ children }: { children: ReactNode }) => {
 				console.error("LIFF初期化エラー:", e);
 				setGroupId(null);
 			} finally {
-				setLoading(false);
+				setpageLoading(false);
 			}
 		};
 
@@ -66,7 +66,7 @@ export const GroupConnectProvider = ({ children }: { children: ReactNode }) => {
 	}, []);
 
 	return (
-		<GroupConnect.Provider value={{ groupId, loading }}>
+		<GroupConnect.Provider value={{ groupId, pageLoading }}>
 			{children}
 		</GroupConnect.Provider>
 	);
