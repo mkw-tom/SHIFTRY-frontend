@@ -12,8 +12,8 @@ export const postConnectLineGroup = async (
 		headers: {
 			"Content-Type": "application/json",
 			Authorization: `Bearer ${getToken()}`,
-			"X-Group-Id": groupId,
-			"X-Store-Id": getStoreToken(),
+			"x-group-id": groupId,
+			"x-store-id": getStoreToken(),
 		},
 	});
 
