@@ -1,4 +1,5 @@
 import React from "react";
+import { ConnectUIProvider } from "../context/useConnectUI";
 import { GroupConnectProvider } from "../context/useGroupConnect";
 import ConnectModalContent from "./ConnectModalContent";
 
@@ -10,7 +11,9 @@ const ConnectModalArea = () => {
 					LINEグループ連携
 				</h2>
 				<GroupConnectProvider>
-					<ConnectModalContent />
+					<ConnectUIProvider>
+						<ConnectModalContent />
+					</ConnectUIProvider>
 				</GroupConnectProvider>
 			</div>
 		</div>
