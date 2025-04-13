@@ -7,7 +7,7 @@ export const postConnectLineGroup = async (
 	if (groupId === null) {
 		throw new Error("groupId is not found");
 	}
-	const res = await fetch(`${API_URL}/api/connect-lineGroup`, {
+	const res = await fetch(`${API_URL}/api/store/connect-lineGroup`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",

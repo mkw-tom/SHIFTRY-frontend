@@ -10,12 +10,12 @@ const InviteBotModal = () => {
 				height={300}
 				className="object-cover mx-auto"
 			/>
-			<a
+			{/* <a
 				href="line://"
 				className="btn btn-sm bg-green02 rounded-full border-none w-2/3 mx-auto text-white"
 			>
 				LINEを開く
-			</a>
+			</a> */}
 		</>
 	);
 };
