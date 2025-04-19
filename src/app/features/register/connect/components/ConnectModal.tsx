@@ -1,5 +1,5 @@
 import React from "react";
-import { useAgreeCheckbox } from "../../common/hooks/useAgreeCheckBox";
+import { useAgreeCheckbox } from "../../../common/hooks/useAgreeCheckBox";
 import { useConnectUI } from "../context/useConnectUI";
 import ConnectButton from "./ConnectButton";
 
