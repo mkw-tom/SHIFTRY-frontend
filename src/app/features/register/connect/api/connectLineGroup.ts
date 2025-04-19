@@ -7,7 +7,7 @@ export const postConnectLineGroup = async (
 	if (groupId === null) {
 		throw new Error("groupId is not found");
 	}
-	if(!getStoreToken() || !getToken()) {
+	if (!getStoreToken() || !getToken()) {
 		throw new Error("token is not found");
 	}
 	const res = await fetch(`${API_URL}/api/store/connect-lineGroup`, {
