@@ -1,13 +1,12 @@
-import React from "react";
-import FirstView from "../features/common/components/FirstView";
-import ConnectModalArea from "../features/connect/components/ConnectModalArea";
+import FirstView from "../../features/common/components/FirstView";
+import FormArea from "../../features/register/owner/components/form/FormArea";
 
 const Page = () => {
 	return (
 		<main className="bg-green01 w-full  h-lvh">
 			<div className="bg-green01 w-full md:w-[400px] mx-auto">
 				<FirstView />
-				<ConnectModalArea />
+				<FormArea />
 			</div>
 		</main>
 	);
