@@ -1,8 +1,10 @@
 // features/common/hooks/useLineAuth.ts
 "use client";
 
+import { API_URL } from "@/app/lib/env";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { lineAuthResponse } from "../types/api";
 
 export const useLineAuth = () => {
 	const searchParams = useSearchParams();
@@ -10,6 +12,7 @@ export const useLineAuth = () => {
 		userId: string;
 		name: string;
 		pictureUrl: string;
+		line_token: string;
 	} | null>(null);
 	const [error, setError] = useState<string | null>(null);
 	const code = searchParams.get("code");
@@ -20,21 +23,17 @@ export const useLineAuth = () => {
 			return;
 		}
 
-		console.log("LINEのcode:", code);
-		console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
 		const fetchLineAuth = async () => {
 			try {
-				const res = await fetch(
-					`${process.env.NEXT_PUBLIC_API_URL}/api/auth/line-auth`,
-					{
-						method: "POST",
-						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify({ code }),
-						credentials: "include",
-					},
-				);
+				const res = await fetch(`${API_URL}/api/auth/line-auth`, {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ code }),
+					credentials: "include",
+				});
 
 				const data = await res.json();
+
 				if (!res.ok) throw new Error(data.message || "LINEログイン失敗");
 				setUserLineInfo(data);
 			} catch (err) {
