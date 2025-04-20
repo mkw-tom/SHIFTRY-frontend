@@ -17,10 +17,13 @@ export const useNavigation = () => {
 	const navigateToInvite = () => router.push("/register/connect");
 	const navigateHome = () => router.push("/");
 
+	const navigatePayment = () => router.push("/dashboard/payment");
+
 	return {
 		navigateAfterLineAuth,
 		navigateToFail,
 		navigateToInvite,
 		navigateHome,
+		navigatePayment,
 	};
 };

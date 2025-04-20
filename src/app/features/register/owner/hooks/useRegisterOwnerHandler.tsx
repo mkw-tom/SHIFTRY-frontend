@@ -1,12 +1,10 @@
-import { useNavigation } from "@/app/lib/navigation";
 import { setStoreToken, setUserToken } from "@/app/redux/slices/token";
 import type { AppDispatch, RootState } from "@/app/redux/store";
 import type { UserType } from "@/app/types/User";
-import { setTokenAndStoreToken } from "@/app/utils/token";
 import { useDispatch, useSelector } from "react-redux";
 import { postRegisterOwner } from "../api/registerOwner";
-// import { useRegisterSteps } from "../context/UseRegisterStepContext";
 import { UseRegisterLoadingUI } from "../context/UseRegisterLoading";
+import { useRegisterSteps } from "../context/UseRegisterStepContext";
 import { useRegisterOwnerPayload } from "./useRegisterOwnerPayload";
 
 export const useRegisterOwnerHandler = ({
@@ -20,7 +18,7 @@ export const useRegisterOwnerHandler = ({
 }) => {
 	const { createPayload } = useRegisterOwnerPayload();
 	const { setApiLoading } = UseRegisterLoadingUI();
-	const { navigateToInvite } = useNavigation();
+	const { changeInviteBotStep } = useRegisterSteps();
 	const lineToken = useSelector(
 		(state: RootState) => state.token.lineToken,
 	) as string;
@@ -38,8 +36,7 @@ export const useRegisterOwnerHandler = ({
 			dispatch(setUserToken(res.token));
 			dispatch(setStoreToken(res.store_token));
 
-			// changeInviteBotStep();
-			navigateToInvite();
+			changeInviteBotStep();
 		} catch (e) {
 			console.error("登録エラー:", e);
 		} finally {
