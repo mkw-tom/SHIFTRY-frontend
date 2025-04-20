@@ -1,31 +1,57 @@
 import { UseRegisterLoadingUI } from "../../context/UseRegisterLoading";
-import useStoreNameForm from "../../hooks/useStoreNameForm";
+import useRegiserOwnerAndStore from "../../hooks/useStoreNameForm";
 import RegisterButton from "../button/RegisterButton";
 
 const RegisterForm = () => {
-	const { register, errors, isDisabled, storeName } = useStoreNameForm();
+	const { register, errors, isDisabled, name, storeName } =
+		useRegiserOwnerAndStore();
 	const { apiLoading } = UseRegisterLoadingUI();
 
 	return (
 		<>
 			<fieldset className="fieldset w-11/12 mx-auto flex flex-col items-center">
 				<legend className="fieldset-legend text-black text-center">
-					店舗名
+					オーナー名
 				</legend>
 				<input
 					{...register("name")}
+					type="text"
+					className="input input-xs sm:input-sm input-success bg-gray01 text-black"
+					placeholder="例：タロウ"
+					maxLength={20}
+					disabled={apiLoading}
+				/>
+				<p className="fieldset-label text-error font-bold">
+					※プライバシー保護のため、フルネームは避けてください。
+				</p>
+				{errors.name && (
+					<p className="fieldset-label text-error">{errors.name.message}</p>
+				)}
+			</fieldset>
+			<fieldset className="fieldset w-11/12 mx-auto flex flex-col items-center">
+				<legend className="fieldset-legend text-black text-center">
+					店舗名
+				</legend>
+				<input
+					{...register("storeName")}
 					type="text"
 					className="input input-xs sm:input-sm input-success bg-gray01 text-black"
 					placeholder="例：株式会社〇〇"
 					maxLength={20}
 					disabled={apiLoading}
 				/>
-				{errors.name && (
-					<p className="fieldset-label text-error">{errors.name.message}</p>
+				{errors.storeName && (
+					<p className="fieldset-label text-error">
+						{errors.storeName.message}
+					</p>
 				)}
 			</fieldset>
 
-			<RegisterButton storeName={storeName} isDisabled={isDisabled} />
+			<RegisterButton
+				name={name}
+				storeName={storeName}
+				isDisabled={isDisabled}
+			/>
 		</>
 	);
 };

@@ -15,7 +15,7 @@ export const postConnectLineGroup = async (
 		headers: {
 			"Content-Type": "application/json",
 			Authorization: `Bearer ${getToken()}`,
-			"x-group-id": groupId,
+			"x-group-id": groupId, /// URLから取得したgroupIdのトークンをセット⭐️⭐️⭐️
 			"x-store-id": getStoreToken(),
 		},
 	});

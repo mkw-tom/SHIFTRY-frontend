@@ -3,4 +3,5 @@ export interface lineAuthResponse {
 	userId: string;
 	name: string;
 	pictureUrl: string;
+	line_token: string;
 }
