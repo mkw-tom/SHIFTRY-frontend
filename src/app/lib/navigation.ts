@@ -6,15 +6,15 @@ export const useNavigation = () => {
 
 	const navigateAfterLineAuth = (role: UserRole) => {
 		if (role === "STAFF") {
-			router.push("/");
+			router.push("/register/owner");
 		} else {
-			router.push("/register");
+			router.push("/register/owner");
 		}
 	};
 
 	const navigateToFail = () => router.push("/auth/fail");
 
-	const navigateToInvite = () => router.push("/connect");
+	const navigateToInvite = () => router.push("/register/connect");
 	const navigateHome = () => router.push("/");
 
 	return {

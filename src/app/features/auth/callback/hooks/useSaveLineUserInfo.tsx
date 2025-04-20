@@ -21,11 +21,9 @@ export const useSaveLineUserInfo = () => {
 			const { userId, pictureUrl, line_token } = userLineInfo;
 			dispatch(setRegisterUserInfo({ pictureUrl, lineId: userId, role }));
 			dispatch(setLineToken(line_token));
-			console.log("line_token", line_token);
-			window.alert(lineToken as string);
 			navigateAfterLineAuth(role);
 		}
-	}, [userLineInfo, dispatch, role, navigateAfterLineAuth, lineToken]);
+	}, [userLineInfo, dispatch, role, navigateAfterLineAuth]);
 
 	useEffect(() => {
 		if (error) {
