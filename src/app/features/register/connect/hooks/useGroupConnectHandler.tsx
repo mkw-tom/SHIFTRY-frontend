@@ -1,4 +1,4 @@
-import { setGroupToken } from "@/app/redux/slices/token";
+import { setConnectedGroup, setGroupToken } from "@/app/redux/slices/token";
 import type { AppDispatch, RootState } from "@/app/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { postConnectLineGroup } from "../api/connectLineGroup";
@@ -29,6 +29,7 @@ const useGroupConnectHandler = (
 			}
 
 			dispatch(setGroupToken(res.group_token));
+			dispatch(setConnectedGroup(true));
 			changeConnectedStep();
 		} catch (error) {
 			console.error("グループ連携失敗:", error);

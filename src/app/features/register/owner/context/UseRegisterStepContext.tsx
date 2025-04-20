@@ -40,9 +40,9 @@ export const RegisterStepsProvider = ({
 	useEffect(() => {
 		if (token.userToken && token.storeToken) {
 			setStep(RegisterStep.InviteBot);
-		}
-		if (user?.lineId) {
+		} else if (user?.lineId) {
 			setStep(RegisterStep.Register);
+			return;
 		}
 	}, [user?.lineId, token.userToken, token.storeToken]);
 
