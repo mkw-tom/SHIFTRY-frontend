@@ -1,11 +1,13 @@
 // src/features/auth/tokenSlice.ts
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { set } from "react-hook-form";
 
 type AuthState = {
 	lineToken: string | null;
 	userToken: string | null;
 	storeToken: string | null;
 	groupToken: string | null;
+	connectedGroup: boolean;
 };
 
 const initialState: AuthState = {
@@ -13,6 +15,7 @@ const initialState: AuthState = {
 	userToken: null,
 	storeToken: null,
 	groupToken: null,
+	connectedGroup: false,
 };
 
 export const tokenSlice = createSlice({
@@ -34,6 +37,9 @@ export const tokenSlice = createSlice({
 		setGroupToken: (state, action: PayloadAction<string>) => {
 			state.groupToken = action.payload;
 		},
+		setConnectedGroup: (state, action: PayloadAction<boolean>) => {
+			state.connectedGroup = action.payload;
+		},
 		clearAllTokens: (state) => {
 			state.lineToken = null;
 			state.userToken = null;
@@ -49,6 +55,7 @@ export const {
 	setStoreToken,
 	setGroupToken,
 	clearAllTokens,
+	setConnectedGroup,
 } = tokenSlice.actions;
 
 export default tokenSlice.reducer;

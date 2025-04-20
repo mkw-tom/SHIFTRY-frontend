@@ -35,10 +35,10 @@ export const ConnectStepsProvider = ({ children }: { children: ReactNode }) => {
 	const token = useSelector((state: RootState) => state.token);
 
 	useEffect(() => {
-		if (token.userToken && token.storeToken && token.groupToken) {
+		if (token.connectedGroup === true) {
 			setStep(ConnectStep.Connected);
 		}
-	}, [token.userToken, token.storeToken, token.groupToken]);
+	}, [token.connectedGroup]);
 
 	function changeConnectedStep() {
 		setStep(ConnectStep.Connected);
