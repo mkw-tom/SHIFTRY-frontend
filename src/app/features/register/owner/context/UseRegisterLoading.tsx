@@ -1,3 +1,4 @@
+import type { RootState } from "@/app/redux/store";
 import {
 	type Dispatch,
 	type ReactNode,
@@ -7,6 +8,7 @@ import {
 	useEffect,
 	useState,
 } from "react";
+import { useSelector } from "react-redux";
 
 export type RegisterLoadingUIContextType = {
 	pageLoading: boolean;
@@ -28,16 +30,21 @@ export const UseRegisterLoadingUI = () => {
 
 export const RegisterLoadingUIProvider = ({
 	children,
-}: { children: ReactNode }) => {
+}: {
+	children: ReactNode;
+}) => {
+	const token = useSelector((state: RootState) => state.token);
 	const [pageLoading, setPageLoading] = useState<boolean>(true);
 	const [apiLoading, setApiLoading] = useState<boolean>(false);
 
 	useEffect(() => {
-		const saved = localStorage.getItem("isRegistered");
-		if (saved === null || saved === "true") {
+		if (
+			typeof token.userToken !== "undefined" &&
+			typeof token.storeToken !== "undefined"
+		) {
 			setPageLoading(false);
 		}
-	}, []);
+	}, [token.userToken, token.storeToken]);
 
 	const value = {
 		pageLoading,
