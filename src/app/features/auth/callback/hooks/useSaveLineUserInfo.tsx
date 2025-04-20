@@ -23,7 +23,7 @@ export const useSaveLineUserInfo = () => {
 			dispatch(setLineToken(line_token));
 			navigateAfterLineAuth(role);
 		}
-	}, [userLineInfo, dispatch, role, navigateAfterLineAuth, lineToken]);
+	}, [userLineInfo, dispatch, role, navigateAfterLineAuth]);
 
 	useEffect(() => {
 		if (error) {
