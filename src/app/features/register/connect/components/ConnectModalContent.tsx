@@ -1,12 +1,17 @@
 "use client";
 import React from "react";
-import { useGroupConnect } from "../context/useGroupConnect";
+
+import { UseConnectLoadingUI } from "../context/useConnectLoadingUI";
+import { useConnectSteps } from "../context/useConnectStep";
+import { useGroupToken } from "../hooks/useGroupToken";
 import ConnectModal from "./ConnectModal";
-import InviteBotModal from "./InviteBotModal";
+import SuccessConnectModal from "./SuccessConnectModal";
 
 const ConnectModalContent = () => {
-	const { groupId, pageLoading } = useGroupConnect();
-	// const groupId = "test"
+	useGroupToken();
+	const { pageLoading } = UseConnectLoadingUI();
+	const { step } = useConnectSteps();
+
 	if (pageLoading) {
 		return (
 			<div className="w-full ">
@@ -19,7 +24,8 @@ const ConnectModalContent = () => {
 	}
 	return (
 		<div className="flex flex-col gap-5 mt-5">
-			{groupId ? <ConnectModal /> : <InviteBotModal />}
+			{step === 0 && <ConnectModal />}
+			{step === 1 && <SuccessConnectModal />}
 		</div>
 	);
 };

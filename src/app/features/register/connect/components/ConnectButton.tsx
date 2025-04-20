@@ -1,17 +1,18 @@
 "use client";
 
+import type { RootState } from "@/app/redux/store";
 import React from "react";
-import { useConnectUI } from "../context/useConnectUI";
+import { useSelector } from "react-redux";
+import { UseConnectLoadingUI } from "../context/useConnectLoadingUI";
 // import { useGroupConnect } from "../context/useGroupConnect";
 import useGroupConnectHandler from "../hooks/useGroupConnectHandler";
 
 const ConnectButton = ({ isDisabled }: { isDisabled: boolean }) => {
-	// const { groupId } = useGroupConnect();
-	const groupId = "test";
-	const { isLoading, UpdateLoading } = useConnectUI();
+	const groupToken = useSelector((state: RootState) => state.token.groupToken);
+	const { setApiLoading, apiLoading } = UseConnectLoadingUI();
 	const { GroupConnectHandler } = useGroupConnectHandler(
-		groupId,
-		UpdateLoading,
+		groupToken,
+		setApiLoading,
 	);
 
 	return (
@@ -19,9 +20,9 @@ const ConnectButton = ({ isDisabled }: { isDisabled: boolean }) => {
 			type="button"
 			className="btn btn-sm sm:btn-md bg-green02 rounded-full border-none w-2/3 mx-auto text-white"
 			onClick={GroupConnectHandler}
-			disabled={isDisabled || isLoading}
+			disabled={isDisabled || apiLoading}
 		>
-			{isLoading ? (
+			{apiLoading ? (
 				<span className="loading loading-dots" />
 			) : (
 				<div className="flex items-center gap-2">
