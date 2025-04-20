@@ -26,14 +26,12 @@ export const UserSlice = createSlice({
 		},
 		setRegisterUserInfo: (
 			state,
-			action: PayloadAction<
-				Pick<UserType, "name" | "pictureUrl" | "lineId" | "role">
-			>,
+			action: PayloadAction<Pick<UserType, "lineId" | "pictureUrl" | "role">>,
 		) => {
 			if (state.user) {
-				state.user.name = action.payload.name;
-				state.user.pictureUrl = action.payload.pictureUrl;
+				// state.user.name = action.payload.name;
 				state.user.lineId = action.payload.lineId;
+				state.user.pictureUrl = action.payload.pictureUrl;
 				state.user.role = action.payload.role;
 			}
 		},
