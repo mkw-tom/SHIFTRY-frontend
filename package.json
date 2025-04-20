@@ -21,6 +21,7 @@
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.55.0",
     "react-redux": "^9.2.0",
+    "redux-persist": "^6.0.0",
     "zod": "^3.24.2"
   },
   "devDependencies": {
@@ -30,6 +31,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/redux-persist": "^4.0.0",
     "daisyui": "^5.0.9",
     "dotenv": "^16.4.7",
     "eslint": "^9",
