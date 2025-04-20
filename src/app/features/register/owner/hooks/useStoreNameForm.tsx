@@ -2,23 +2,29 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { isValid } from "zod";
 import {
-	type registerStoreNmaeType,
-	registerStoreNmaeValidate,
+	type regiserOwnerAndStoreType,
+	regiserOwnerAndStoreValidate,
 } from "../validate/RegisterOwnerFormValidation";
 
-const useStoreNameForm = () => {
+const useRegiserOwnerAndStore = () => {
 	const {
 		register,
 		formState: { errors },
 		watch,
-	} = useForm<registerStoreNmaeType>({
-		resolver: zodResolver(registerStoreNmaeValidate),
+	} = useForm<regiserOwnerAndStoreType>({
+		resolver: zodResolver(regiserOwnerAndStoreValidate),
 		mode: "onChange",
 	});
-	const storeName = watch("name") ?? "";
-	const isDisabled = !isValid || storeName === "";
+	const name = watch("name") ?? "";
+	const storeName = watch("storeName") ?? "";
+	const isDisabled =
+		!isValid ||
+		storeName === "" ||
+		name === "" ||
+		errors.name ||
+		errors.storeName;
 
-	return { register, errors, isDisabled, storeName };
+	return { register, errors, isDisabled, name, storeName };
 };
 
-export default useStoreNameForm;
+export default useRegiserOwnerAndStore;

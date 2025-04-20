@@ -1,3 +1,4 @@
+import { stat } from "node:fs";
 import { useNavigation } from "@/app/lib/navigation";
 import type { RootState } from "@/app/redux/store";
 import {
@@ -36,18 +37,17 @@ export const RegisterStepsProvider = ({
 	const [step, setStep] = useState<RegisterStep>(RegisterStep.Auth);
 	const { navigateToInvite } = useNavigation();
 	const { user } = useSelector((state: RootState) => state.user);
+	const token = useSelector((state: RootState) => state.token);
 
 	useEffect(() => {
-		const token = localStorage.getItem("token");
-		const storeToken = localStorage.getItem("store_token");
-
-		if (token && storeToken) {
-			navigateToInvite();
+		if (token.userToken) {
+			// navigateToInvite();
+			setStep(RegisterStep.InviteBot);
 		}
 		if (user?.lineId) {
 			setStep(RegisterStep.Register);
 		}
-	}, [navigateToInvite, user?.lineId]);
+	}, [user?.lineId, token.userToken]);
 
 	return (
 		<registerUIContext.Provider value={{ step }}>

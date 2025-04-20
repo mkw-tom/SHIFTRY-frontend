@@ -8,6 +8,7 @@ export const postRegisterOwner = async (
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
+			"x-line-id": payload.lineToken,
 		},
 		credentials: "include",
 		body: JSON.stringify(payload),
