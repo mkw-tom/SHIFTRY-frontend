@@ -1,32 +1,40 @@
-import { useNavigation } from "@/app/lib/navigation";
+import { setGroupToken } from "@/app/redux/slices/token";
+import type { AppDispatch, RootState } from "@/app/redux/store";
+import { useDispatch, useSelector } from "react-redux";
 import { postConnectLineGroup } from "../api/connectLineGroup";
+import { useConnectSteps } from "../context/useConnectStep";
 
 const useGroupConnectHandler = (
-	groupId: string | null,
-	UpdateLoading: (bool: boolean) => void,
+	groupToken: string | null,
+	setApiLoading: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
-	const { navigateHome } = useNavigation();
+	const { userToken, storeToken } = useSelector(
+		(state: RootState) => state.token,
+	);
+	const dispatch = useDispatch<AppDispatch>();
+	const { changeConnectedStep } = useConnectSteps();
+
 	async function GroupConnectHandler() {
-		if (!groupId) {
+		if (!groupToken) {
 			alert(
 				"グループIDが取得できませんでした。LINEグループ内からアクセスしてください。",
 			);
 			return;
 		}
-
 		try {
-			UpdateLoading(true);
-			const res = await postConnectLineGroup(groupId);
-			if (!res.ok) {
+			setApiLoading(true);
+			const res = await postConnectLineGroup(userToken, storeToken, groupToken);
+			if (!res.ok || !res.group_token) {
 				throw new Error("グループ連携に失敗しました");
 			}
 
-			navigateHome();
+			dispatch(setGroupToken(res.group_token));
+			changeConnectedStep();
 		} catch (error) {
 			console.error("グループ連携失敗:", error);
 			alert("LINEグループとの連携に失敗しました。もう一度お試しください。");
 		} finally {
-			UpdateLoading(false);
+			setApiLoading(false);
 		}
 	}
 

@@ -1,22 +1,27 @@
 import { API_URL } from "@/app/lib/env";
-import { getStoreToken, getToken } from "@/app/utils/token";
 
 export const postConnectLineGroup = async (
-	groupId: string | null,
-): Promise<{ ok: boolean }> => {
-	if (groupId === null) {
-		throw new Error("groupId is not found");
+	userToken: string | null,
+	storeToken: string | null,
+	groupToken: string | null,
+): Promise<{ ok: boolean; group_token: string }> => {
+	if (groupToken === null) {
+		throw new Error("groupToken is not found");
 	}
-	if (!getStoreToken() || !getToken()) {
-		throw new Error("token is not found");
+	if (userToken === null) {
+		throw new Error("userToken is not found");
 	}
+	if (storeToken === null) {
+		throw new Error("storeToken is not found");
+	}
+
 	const res = await fetch(`${API_URL}/api/store/connect-lineGroup`, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",
-			Authorization: `Bearer ${getToken()}`,
-			"x-group-id": groupId, /// URLから取得したgroupIdのトークンをセット⭐️⭐️⭐️
-			"x-store-id": getStoreToken(),
+			Authorization: `Bearer ${userToken}`,
+			"x-store-id": storeToken,
+			"x-group-id": groupToken,
 		},
 	});
 
