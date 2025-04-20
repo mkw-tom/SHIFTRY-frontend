@@ -1,6 +1,6 @@
 import React from "react";
-import { ConnectUIProvider } from "../context/useConnectUI";
-import { GroupConnectProvider } from "../context/useGroupConnect";
+import { ConnectLoadingUIProvider } from "../context/useConnectLoadingUI";
+import { ConnectStepsProvider } from "../context/useConnectStep";
 import ConnectModalContent from "./ConnectModalContent";
 
 const ConnectModalArea = () => {
@@ -10,11 +10,11 @@ const ConnectModalArea = () => {
 				<h2 className="text-center font-bold text-sm text-black border-b-1 border-b-gray01 pb-1">
 					LINEグループ連携
 				</h2>
-				<GroupConnectProvider>
-					<ConnectUIProvider>
+				<ConnectStepsProvider>
+					<ConnectLoadingUIProvider>
 						<ConnectModalContent />
-					</ConnectUIProvider>
-				</GroupConnectProvider>
+					</ConnectLoadingUIProvider>
+				</ConnectStepsProvider>
 			</div>
 		</div>
 	);

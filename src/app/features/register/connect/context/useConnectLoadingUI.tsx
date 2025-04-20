@@ -1,3 +1,4 @@
+"use client";
 import type { RootState } from "@/app/redux/store";
 import {
 	type Dispatch,
@@ -10,25 +11,25 @@ import {
 } from "react";
 import { useSelector } from "react-redux";
 
-export type RegisterLoadingUIContextType = {
+export type connectLoadingUIContextType = {
 	pageLoading: boolean;
 	apiLoading: boolean;
 	setApiLoading: Dispatch<SetStateAction<boolean>>;
 };
 
-const RegisterLoadingUIContext = createContext<
-	RegisterLoadingUIContextType | undefined
+const connectLoadingUIContext = createContext<
+	connectLoadingUIContextType | undefined
 >(undefined);
 
-export const UseRegisterLoadingUI = () => {
-	const context = useContext(RegisterLoadingUIContext);
+export const UseConnectLoadingUI = () => {
+	const context = useContext(connectLoadingUIContext);
 	if (context === undefined) {
-		throw new Error("useIsRegister must be used within a IsRegisterProvider");
+		throw new Error("useIsconnect must be used within a IsconnectProvider");
 	}
 	return context;
 };
 
-export const RegisterLoadingUIProvider = ({
+export const ConnectLoadingUIProvider = ({
 	children,
 }: {
 	children: ReactNode;
@@ -53,8 +54,8 @@ export const RegisterLoadingUIProvider = ({
 	};
 
 	return (
-		<RegisterLoadingUIContext.Provider value={value}>
+		<connectLoadingUIContext.Provider value={value}>
 			{children}
-		</RegisterLoadingUIContext.Provider>
+		</connectLoadingUIContext.Provider>
 	);
 };
