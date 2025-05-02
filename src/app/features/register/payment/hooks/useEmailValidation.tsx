@@ -1,10 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { isValid } from "zod";
-import {
-	type emailType,
-	emailValidate,
-} from "../validation/payment.validation";
+import { type emailType, emailValidate } from "../validation/form";
 
 const useEmailValidate = () => {
 	const {

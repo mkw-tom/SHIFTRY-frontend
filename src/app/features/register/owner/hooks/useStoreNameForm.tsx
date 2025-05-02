@@ -4,7 +4,7 @@ import { isValid } from "zod";
 import {
 	type regiserOwnerAndStoreType,
 	regiserOwnerAndStoreValidate,
-} from "../validate/RegisterOwnerFormValidation";
+} from "../validation/form";
 
 const useRegiserOwnerAndStore = () => {
 	const {

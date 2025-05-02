@@ -1,10 +1,18 @@
 import { API_URL } from "@/app/lib/env";
 
+import type {
+	ErrorResponse,
+	ValidationErrorResponse,
+} from "@/app/features/common/types/errors";
+import type { StoreConnectLineGroupResponse } from "../types/api";
+
 export const postConnectLineGroup = async (
 	userToken: string | null,
 	storeToken: string | null,
 	groupToken: string | null,
-): Promise<{ ok: boolean; group_token: string }> => {
+): Promise<
+	StoreConnectLineGroupResponse | ErrorResponse | ValidationErrorResponse
+> => {
 	if (groupToken === null) {
 		throw new Error("groupToken is not found");
 	}
@@ -24,11 +32,6 @@ export const postConnectLineGroup = async (
 			"x-group-id": groupToken,
 		},
 	});
-
-	if (!res.ok) {
-		const errorBody = await res.json();
-		throw new Error(errorBody.message || "登録に失敗しました");
-	}
 
 	const data = await res.json();
 	return data;

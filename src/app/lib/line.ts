@@ -1,9 +1,10 @@
+import type { RegisterUserRole } from "../features/common/types/prisma";
 import {
 	NEXT_PUBLIC_LINE_AUTH_CHANNEL_ID,
 	NEXT_PUBLIC_LINE_AUTH_REDIRECT_URI,
 } from "./env";
 
-export const generateLineLoginUrl = (role: "OWNER" | "STAFF") => {
+export const generateLineLoginUrl = (role: RegisterUserRole) => {
 	const base = "https://access.line.me/oauth2/v2.1/authorize";
 	const params = new URLSearchParams({
 		response_type: "code",

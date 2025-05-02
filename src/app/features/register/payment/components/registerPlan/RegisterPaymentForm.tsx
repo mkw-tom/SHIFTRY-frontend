@@ -1,9 +1,7 @@
-import React, { useState } from "react";
-import { PiUsersFill } from "react-icons/pi";
 import { useSelectPlan } from "../../context/useSelectPlanContext";
 import useEmailValidate from "../../hooks/useEmailValidation";
 import usePaymentMethodId from "../../hooks/usePaymentMethodId";
-import type { PlanName } from "../../types/plan";
+import type { PlanName } from "../../types/context";
 import InputCardInfo from "./InputCardInfo";
 import InputEmail from "./InputEmail";
 import RegisterPaymentButton from "./RegisterPaymentButton";

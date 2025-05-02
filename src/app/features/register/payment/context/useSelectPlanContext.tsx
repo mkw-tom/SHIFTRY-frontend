@@ -7,7 +7,7 @@ import {
 	type PlanColorReturn,
 	PlanName,
 	type SelectPlanContextType,
-} from "../types/plan";
+} from "../types/context";
 
 const selectPlanContext = createContext<SelectPlanContextType | undefined>(
 	undefined,

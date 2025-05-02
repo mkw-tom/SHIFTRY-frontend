@@ -1,7 +1,7 @@
 import React from "react";
 import { PiUsersFill } from "react-icons/pi";
 import { useSelectPlan } from "../../context/useSelectPlanContext";
-import type { PlanName } from "../../types/plan";
+import type { PlanName } from "../../types/context";
 
 const SelectedPlanCard = () => {
 	const { selected, planColoerSwitch, getProductId } = useSelectPlan();

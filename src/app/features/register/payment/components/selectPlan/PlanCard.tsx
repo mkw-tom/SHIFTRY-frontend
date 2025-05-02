@@ -2,7 +2,7 @@ import React, { Dispatch } from "react";
 import { FaCheck } from "react-icons/fa";
 import { PiUsersFill } from "react-icons/pi";
 import { useSelectPlan } from "../../context/useSelectPlanContext";
-import type { Plan } from "../../types/plan";
+import type { Plan } from "../../types/context";
 
 const PlanCard = ({ plan }: { plan: Plan }) => {
 	const { selectPlan, planColoerSwitch, selected } = useSelectPlan();

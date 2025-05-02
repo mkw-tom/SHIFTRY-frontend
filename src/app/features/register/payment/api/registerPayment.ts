@@ -1,11 +1,16 @@
+import type {
+	ErrorResponse,
+	ValidationErrorResponse,
+} from "@/app/features/common/types/errors";
 import { API_URL } from "@/app/lib/env";
+import type { CreatePaymentResponse } from "../types/api";
 import type { createPaymentType } from "../validation/api";
 
 export const postCreatePayment = async (
 	userToken: string | null,
 	storeToken: string | null,
 	payload: createPaymentType,
-) => {
+): Promise<CreatePaymentResponse | ErrorResponse | ValidationErrorResponse> => {
 	if (userToken === null) {
 		throw new Error("userToken is not found");
 	}
@@ -23,11 +28,6 @@ export const postCreatePayment = async (
 			body: JSON.stringify(payload),
 		},
 	});
-
-	if (!res.ok) {
-		const errorBody = await res.json();
-		throw new Error(errorBody.message || "登録に失敗しました");
-	}
 
 	const data = await res.json();
 	return data;

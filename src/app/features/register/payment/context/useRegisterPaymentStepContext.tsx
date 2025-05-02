@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import {
 	RegisterPaymentStep,
 	type RegisterPaymentUIContextType,
-} from "../types/step";
+} from "../types/context";
 
 const registerPaymentUIContext = createContext<
 	RegisterPaymentUIContextType | undefined
@@ -46,7 +46,7 @@ export const RegisterPaymentStepsProvider = ({
 				return setStep(RegisterPaymentStep.Select);
 			}
 			const payment = await getPayment(userToken, storeToken);
-			if (payment) {
+			if (payment.ok) {
 				return setStep(RegisterPaymentStep.Registed);
 			}
 			return setStep(RegisterPaymentStep.Select);
@@ -64,7 +64,7 @@ export const RegisterPaymentStepsProvider = ({
 	const headingText = (() => {
 		switch (step) {
 			case RegisterPaymentStep.Select:
-				return "プラン選択";
+				return "ご利用プランを選択";
 			case RegisterPaymentStep.Regist:
 				return "お支払い情報の入力";
 			case RegisterPaymentStep.Registed:

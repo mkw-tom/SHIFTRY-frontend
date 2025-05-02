@@ -1,8 +1,9 @@
 import type { RootState } from "@/app/redux/store";
 import type { FieldError } from "react-hook-form";
 import { useSelector } from "react-redux";
-import { UseRegisterLoadingUI } from "../../context/UseRegisterLoading";
+import { useRegisterLoadingUI } from "../../../common/context/useRegisterLoadingUI";
 import { useRegisterOwnerHandler } from "../../hooks/useRegisterOwnerHandler";
+import type { userInputType } from "../../validation/api";
 
 const RegisterButton = ({
 	name,
@@ -13,9 +14,16 @@ const RegisterButton = ({
 	storeName: string;
 	isDisabled: true | FieldError | undefined;
 }) => {
-	const { apiLoading } = UseRegisterLoadingUI();
+	const { apiLoading } = useRegisterLoadingUI();
 	const { user } = useSelector((state: RootState) => state.user);
-	const { handleRegister } = useRegisterOwnerHandler({ user, name, storeName });
+
+	const userInput = {
+		name: name,
+		role: user?.role,
+		pictureUrl: user?.pictureUrl,
+	} as userInputType;
+
+	const { handleRegister } = useRegisterOwnerHandler({ userInput, storeName });
 
 	return (
 		<button

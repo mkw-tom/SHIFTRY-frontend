@@ -1,10 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 // hooks/useAgreeCheckbox.ts
 import { useForm } from "react-hook-form";
-import {
-	type CheckBoxType,
-	checkBoxValidate,
-} from "../validation/commoValidations";
+import { type CheckBoxType, checkBoxValidate } from "../validation/form";
 
 export const useAgreeCheckbox = () => {
 	const {
