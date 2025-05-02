@@ -1,18 +1,17 @@
 "use clinet";
 import React from "react";
-import { UseRegisterLoadingUI } from "../../context/UseRegisterLoading";
+import { useRegisterLoadingUI } from "../../../common/context/useRegisterLoadingUI";
 import {
 	RegisterStep,
 	useRegisterSteps,
 } from "../../context/UseRegisterStepContext";
 import InviteBotForm from "./InviteBotForm";
-// import InviteBotForm from "./InviteBotForm";
 import LineAuthForm from "./LineAuthForm";
 import RegisterForm from "./RegisterForm";
 
 const FormContent = () => {
 	const { step } = useRegisterSteps();
-	const { pageLoading } = UseRegisterLoadingUI();
+	const { pageLoading } = useRegisterLoadingUI();
 	if (pageLoading) {
 		return (
 			<div className="w-full ">

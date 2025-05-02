@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
-
-import { UseConnectLoadingUI } from "../context/useConnectLoadingUI";
+import { useRegisterLoadingUI } from "../../common/context/useRegisterLoadingUI";
 import { useConnectSteps } from "../context/useConnectStep";
 import { useGroupToken } from "../hooks/useGroupToken";
 import ConnectModal from "./ConnectModal";
@@ -9,7 +8,7 @@ import SuccessConnectModal from "./SuccessConnectModal";
 
 const ConnectModalContent = () => {
 	useGroupToken();
-	const { pageLoading } = UseConnectLoadingUI();
+	const { pageLoading } = useRegisterLoadingUI();
 	const { step } = useConnectSteps();
 
 	if (pageLoading) {

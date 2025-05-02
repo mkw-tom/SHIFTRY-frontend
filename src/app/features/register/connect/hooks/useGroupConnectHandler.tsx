@@ -24,8 +24,14 @@ const useGroupConnectHandler = (
 		try {
 			setApiLoading(true);
 			const res = await postConnectLineGroup(userToken, storeToken, groupToken);
-			if (!res.ok || !res.group_token) {
-				throw new Error("グループ連携に失敗しました");
+
+			if (!res.ok) {
+				if ("errors" in res) {
+					console.warn(res.message, res.errors);
+					return;
+				}
+				console.error("エラー:", res.message);
+				return;
 			}
 
 			dispatch(setGroupToken(res.group_token));
