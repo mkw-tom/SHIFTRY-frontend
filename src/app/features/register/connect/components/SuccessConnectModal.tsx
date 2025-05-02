@@ -3,7 +3,7 @@ import { useNavigation } from "@/app/lib/navigation";
 import React from "react";
 
 const SuccessConnectModal = () => {
-	const { navigatePayment } = useNavigation();
+	const { navigateRegisterPayment } = useNavigation();
 
 	return (
 		<>
@@ -14,9 +14,9 @@ const SuccessConnectModal = () => {
 			<button
 				type="button"
 				className="btn btn-sm sm:btn-md bg-green02 rounded-full border-none w-2/3 mx-auto text-white"
-				onClick={navigatePayment}
+				onClick={navigateRegisterPayment}
 			>
-				契約プランを選択
+				ご利用プランを選択
 			</button>
 		</>
 	);

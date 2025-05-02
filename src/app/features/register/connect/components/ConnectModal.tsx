@@ -1,12 +1,11 @@
 import React from "react";
 import { useAgreeCheckbox } from "../../../common/hooks/useAgreeCheckBox";
-
-import { UseConnectLoadingUI } from "../context/useConnectLoadingUI";
+import { useRegisterLoadingUI } from "../../common/context/useRegisterLoadingUI";
 import ConnectButton from "./ConnectButton";
 
 const ConnectModal = () => {
 	const { register, isDisabled, errors } = useAgreeCheckbox();
-	const { apiLoading } = UseConnectLoadingUI();
+	const { apiLoading } = useRegisterLoadingUI();
 
 	return (
 		<>

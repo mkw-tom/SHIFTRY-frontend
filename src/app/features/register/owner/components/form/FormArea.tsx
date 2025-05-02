@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-import { RegisterLoadingUIProvider } from "../../context/UseRegisterLoading";
+import { RegisterLoadingUIProvider } from "../../../common/context/useRegisterLoadingUI";
 import { RegisterStepsProvider } from "../../context/UseRegisterStepContext";
 import FormContent from "./FormContent";
 

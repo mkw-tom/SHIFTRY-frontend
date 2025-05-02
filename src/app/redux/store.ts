@@ -1,5 +1,6 @@
 "use client";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import registerPayment from "./slices/registerPayment";
 import store from "./slices/store";
 import user from "./slices/user";
 
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
 	token: tokenReducer,
 	user: user,
 	store: store,
+	registerPayment: registerPayment,
 });
 
 const persistConfig = {

@@ -1,10 +1,10 @@
-import type { UserRole } from "@/app/types/User";
 import { useRouter } from "next/navigation";
+import type { RegisterUserRole } from "../features/common/types/prisma";
 
 export const useNavigation = () => {
 	const router = useRouter();
 
-	const navigateAfterLineAuth = (role: UserRole) => {
+	const navigateAfterLineAuth = (role: RegisterUserRole) => {
 		if (role === "STAFF") {
 			router.push("/register/owner");
 		} else {
@@ -15,15 +15,15 @@ export const useNavigation = () => {
 	const navigateToFail = () => router.push("/auth/fail");
 
 	const navigateToInvite = () => router.push("/register/connect");
-	const navigateHome = () => router.push("/");
+	const navigateDashboard = () => router.push("/dashboard");
 
-	const navigatePayment = () => router.push("/dashboard/payment");
+	const navigateRegisterPayment = () => router.push("/register/payment");
 
 	return {
 		navigateAfterLineAuth,
 		navigateToFail,
 		navigateToInvite,
-		navigateHome,
-		navigatePayment,
+		navigateDashboard,
+		navigateRegisterPayment,
 	};
 };

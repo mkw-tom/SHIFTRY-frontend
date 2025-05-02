@@ -1,9 +1,8 @@
-// store/userSlice.ts
-import type { StoreType } from "@/app/types/Store";
+import type { Store } from "@/app/features/common/types/prisma";
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 type UserState = {
-	store: StoreType | null;
+	store: Store | null;
 };
 
 const initialState: UserState = {
@@ -15,15 +14,12 @@ export const userSlice = createSlice({
 	initialState,
 	reducers: {
 		// 全体セット
-		setStore: (state, action: PayloadAction<StoreType>) => {
+		setStore: (state, action: PayloadAction<Store>) => {
 			state.store = action.payload;
 		},
 
 		// 一部更新（プロフィール）
-		updateStoreName: (
-			state,
-			action: PayloadAction<Pick<StoreType, "name">>,
-		) => {
+		updateStoreName: (state, action: PayloadAction<Pick<Store, "name">>) => {
 			if (state.store) {
 				state.store.name = action.payload.name;
 			}

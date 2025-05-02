@@ -1,5 +1,5 @@
 import React from "react";
-import { ConnectLoadingUIProvider } from "../context/useConnectLoadingUI";
+import { RegisterLoadingUIProvider } from "../../common/context/useRegisterLoadingUI";
 import { ConnectStepsProvider } from "../context/useConnectStep";
 import ConnectModalContent from "./ConnectModalContent";
 
@@ -11,9 +11,9 @@ const ConnectModalArea = () => {
 					LINEグループ連携
 				</h2>
 				<ConnectStepsProvider>
-					<ConnectLoadingUIProvider>
+					<RegisterLoadingUIProvider>
 						<ConnectModalContent />
-					</ConnectLoadingUIProvider>
+					</RegisterLoadingUIProvider>
 				</ConnectStepsProvider>
 			</div>
 		</div>

@@ -1,24 +1,31 @@
+import type {
+	ErrorResponse,
+	ValidationErrorResponse,
+} from "@/app/features/common/types/errors";
 import { API_URL } from "@/app/lib/env";
-import type { RegisterOwnerPayload, RegisterOwnerResponse } from "../types/api";
+import type { RegisterOwnerResponse } from "../types/api";
+import type { StoreNameType, userInputType } from "../validation/api";
 
 export const postRegisterOwner = async (
-	payload: RegisterOwnerPayload,
-): Promise<RegisterOwnerResponse> => {
+	lineToken: string,
+	userInput: userInputType,
+	storeName: StoreNameType,
+): Promise<RegisterOwnerResponse | ErrorResponse | ValidationErrorResponse> => {
+	const payload = {
+		userInput,
+		storeName,
+	};
 	const res = await fetch(`${API_URL}/api/auth/register-owner`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
-			"x-line-id": payload.lineToken,
+			"x-line-id": lineToken,
 		},
 		credentials: "include",
 		body: JSON.stringify(payload),
 	});
 
-	if (!res.ok) {
-		const errorBody = await res.json();
-		throw new Error(errorBody.message || "登録に失敗しました");
-	}
-
 	const data = await res.json();
+
 	return data;
 };

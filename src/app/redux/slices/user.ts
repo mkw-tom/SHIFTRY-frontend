@@ -1,8 +1,8 @@
-import type { UserType } from "@/app/types/User";
+import type { User } from "@/app/features/common/types/prisma";
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 type UserState = {
-	user: UserType | null;
+	user: User | null;
 };
 
 const initialState: UserState = {
@@ -12,8 +12,8 @@ const initialState: UserState = {
 		name: "",
 		pictureUrl: "",
 		role: "OWNER",
-		createdAt: "",
-		updatedAt: "",
+		createdAt: new Date(),
+		updatedAt: new Date(),
 	},
 };
 
@@ -21,12 +21,12 @@ export const UserSlice = createSlice({
 	name: "user",
 	initialState,
 	reducers: {
-		setUser: (state, action: PayloadAction<UserType>) => {
+		setUser: (state, action: PayloadAction<User>) => {
 			state.user = action.payload;
 		},
 		setRegisterUserInfo: (
 			state,
-			action: PayloadAction<Pick<UserType, "lineId" | "pictureUrl" | "role">>,
+			action: PayloadAction<Pick<User, "lineId" | "pictureUrl" | "role">>,
 		) => {
 			if (state.user) {
 				// state.user.name = action.payload.name;
@@ -38,7 +38,7 @@ export const UserSlice = createSlice({
 
 		updateUserProfile: (
 			state,
-			action: PayloadAction<Pick<UserType, "name" | "pictureUrl">>,
+			action: PayloadAction<Pick<User, "name" | "pictureUrl">>,
 		) => {
 			if (state.user) {
 				state.user.name = action.payload.name;
@@ -46,7 +46,7 @@ export const UserSlice = createSlice({
 			}
 		},
 
-		changeUserRole: (state, action: PayloadAction<Pick<UserType, "role">>) => {
+		changeUserRole: (state, action: PayloadAction<Pick<User, "role">>) => {
 			if (state.user) {
 				state.user.role = action.payload.role;
 			}

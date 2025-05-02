@@ -1,15 +1,13 @@
 "use client";
-
 import type { RootState } from "@/app/redux/store";
 import React from "react";
 import { useSelector } from "react-redux";
-import { UseConnectLoadingUI } from "../context/useConnectLoadingUI";
-// import { useGroupConnect } from "../context/useGroupConnect";
+import { useRegisterLoadingUI } from "../../common/context/useRegisterLoadingUI";
 import useGroupConnectHandler from "../hooks/useGroupConnectHandler";
 
 const ConnectButton = ({ isDisabled }: { isDisabled: boolean }) => {
 	const groupToken = useSelector((state: RootState) => state.token.groupToken);
-	const { setApiLoading, apiLoading } = UseConnectLoadingUI();
+	const { setApiLoading, apiLoading } = useRegisterLoadingUI();
 	const { GroupConnectHandler } = useGroupConnectHandler(
 		groupToken,
 		setApiLoading,

@@ -1,0 +1,10 @@
+import type { z } from "zod";
+import { createPaymentValidate } from "./api";
+
+// export const emailValidate = z.object({
+// 	email: z.string().email("正しいメールアドレスを入力してください").max(100),
+// });
+// export type emailType = z.infer<typeof emailValidate>;
+
+export const emailValidate = createPaymentValidate.pick({ email: true });
+export type emailType = z.infer<typeof emailValidate>;

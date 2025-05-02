@@ -11,25 +11,25 @@ import {
 } from "react";
 import { useSelector } from "react-redux";
 
-export type connectLoadingUIContextType = {
+export type RegisterLoadingUIContextType = {
 	pageLoading: boolean;
 	apiLoading: boolean;
 	setApiLoading: Dispatch<SetStateAction<boolean>>;
 };
 
-const connectLoadingUIContext = createContext<
-	connectLoadingUIContextType | undefined
+const RegisterLoadingUIContext = createContext<
+	RegisterLoadingUIContextType | undefined
 >(undefined);
 
-export const UseConnectLoadingUI = () => {
-	const context = useContext(connectLoadingUIContext);
+export const useRegisterLoadingUI = () => {
+	const context = useContext(RegisterLoadingUIContext);
 	if (context === undefined) {
-		throw new Error("useIsconnect must be used within a IsconnectProvider");
+		throw new Error("useIsRegister must be used within a IsRegisterProvider");
 	}
 	return context;
 };
 
-export const ConnectLoadingUIProvider = ({
+export const RegisterLoadingUIProvider = ({
 	children,
 }: {
 	children: ReactNode;
@@ -54,8 +54,8 @@ export const ConnectLoadingUIProvider = ({
 	};
 
 	return (
-		<connectLoadingUIContext.Provider value={value}>
+		<RegisterLoadingUIContext.Provider value={value}>
 			{children}
-		</connectLoadingUIContext.Provider>
+		</RegisterLoadingUIContext.Provider>
 	);
 };

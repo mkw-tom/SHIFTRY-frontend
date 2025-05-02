@@ -1,11 +1,11 @@
-import { UseRegisterLoadingUI } from "../../context/UseRegisterLoading";
+import { useRegisterLoadingUI } from "../../../common/context/useRegisterLoadingUI";
 import useRegiserOwnerAndStore from "../../hooks/useStoreNameForm";
 import RegisterButton from "../button/RegisterButton";
 
 const RegisterForm = () => {
 	const { register, errors, isDisabled, name, storeName } =
 		useRegiserOwnerAndStore();
-	const { apiLoading } = UseRegisterLoadingUI();
+	const { apiLoading } = useRegisterLoadingUI();
 
 	return (
 		<>
