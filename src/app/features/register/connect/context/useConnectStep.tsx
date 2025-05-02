@@ -31,7 +31,7 @@ export const useConnectSteps = () => {
 };
 
 export const ConnectStepsProvider = ({ children }: { children: ReactNode }) => {
-	const [step, setStep] = useState<ConnectStep>(ConnectStep.NotConnect);
+	const [step, setStep] = useState<ConnectStep>(ConnectStep.Connected);
 	const token = useSelector((state: RootState) => state.token);
 
 	useEffect(() => {

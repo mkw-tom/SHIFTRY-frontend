@@ -1,23 +1,19 @@
 import { setStoreToken, setUserToken } from "@/app/redux/slices/token";
 import type { AppDispatch, RootState } from "@/app/redux/store";
-import type { UserType } from "@/app/types/User";
 import { useDispatch, useSelector } from "react-redux";
+import { useRegisterLoadingUI } from "../../common/context/useRegisterLoadingUI";
 import { postRegisterOwner } from "../api/registerOwner";
-import { UseRegisterLoadingUI } from "../context/UseRegisterLoading";
 import { useRegisterSteps } from "../context/UseRegisterStepContext";
-import { useRegisterOwnerPayload } from "./useRegisterOwnerPayload";
+import type { userInputType } from "../validation/api";
 
 export const useRegisterOwnerHandler = ({
-	user,
-	name,
+	userInput,
 	storeName,
 }: {
-	user: UserType | null;
-	name: string;
+	userInput: userInputType;
 	storeName: string;
 }) => {
-	const { createPayload } = useRegisterOwnerPayload();
-	const { setApiLoading } = UseRegisterLoadingUI();
+	const { setApiLoading } = useRegisterLoadingUI();
 	const { changeInviteBotStep } = useRegisterSteps();
 	const lineToken = useSelector(
 		(state: RootState) => state.token.lineToken,
@@ -27,13 +23,20 @@ export const useRegisterOwnerHandler = ({
 	const handleRegister = async () => {
 		try {
 			setApiLoading(true);
-			const payload = createPayload({ lineToken, user, name, storeName });
-			const res = await postRegisterOwner(payload);
+			const res = await postRegisterOwner(lineToken, userInput, {
+				name: storeName,
+			});
 
-			if (!res.ok) throw new Error("登録失敗");
+			if (!res.ok) {
+				if ("errors" in res) {
+					console.warn(res.message, res.errors);
+					return;
+				}
+				console.error("エラー:", res.message);
+				return;
+			}
 
-			// setTokenAndStoreToken(res.token, res.store.id);
-			dispatch(setUserToken(res.token));
+			dispatch(setUserToken(res.user_token));
 			dispatch(setStoreToken(res.store_token));
 
 			changeInviteBotStep();

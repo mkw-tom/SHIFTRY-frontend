@@ -8,7 +8,7 @@ const RetryAuthButton = () => {
 	const role = useDetectUserRole();
 
 	const handleRetry = () => {
-		const path = role === "OWNER" ? "/register" : "/";
+		const path = role === "OWNER" ? "/register/owner" : "/register/staff";
 		router.push(path);
 	};
 

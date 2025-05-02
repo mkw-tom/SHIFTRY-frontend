@@ -12,7 +12,6 @@ import { useLineAuth } from "./useLineAutth";
 export const useSaveLineUserInfo = () => {
 	const { userLineInfo, error } = useLineAuth();
 	const dispatch = useDispatch<AppDispatch>();
-	const lineToken = useSelector((state: RootState) => state.token.lineToken);
 	const role = useDetectUserRole();
 	const { navigateAfterLineAuth, navigateToFail } = useNavigation();
 
